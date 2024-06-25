@@ -1,6 +1,3 @@
-from os import getenv
-from dotenv import load_dotenv
-
 from telebot.async_telebot import AsyncTeleBot
 from telebot.asyncio_filters import StateFilter
 from telebot.asyncio_storage import StateMemoryStorage
@@ -15,11 +12,10 @@ from telebot.asyncio_handler_backends import State, StatesGroup
 
 class FletBot:
     """
-    This is a base bot class which provides usefull interfaces and other abilities!
+    This is a class which provides usefull interfaces and othe abilities!
     """
-    def __init__(self):
-        load_dotenv()
-        self.BOT_TOKEN = getenv("BOT_TOKEN")
+    def __init__(self, TOKEN):
+        self.BOT_TOKEN = TOKEN
         self.scheduleManager = None
         self.AsyncBot = AsyncTeleBot(self.BOT_TOKEN, state_storage=StateMemoryStorage())
         self.ai_model = None
@@ -46,7 +42,10 @@ class FletBot:
             
     def registerHandlers(self,handlers_list: Optional[List[Handler]]):
         for handler in handlers_list:
-            self.registerHandler(handler)
+            if (type(handler) is list):
+                self.registerHandlers(handler)
+            else:
+                self.registerHandler(handler)
 
     def set_state_filter(self):
         self.AsyncBot.add_custom_filter(StateFilter(self.AsyncBot))

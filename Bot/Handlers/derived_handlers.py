@@ -12,7 +12,7 @@ class MessageHandler(Handler):
                  chat_types: Optional[List[str]]=None,
                  pass_bot: Optional[bool]=False, 
                  **kwargs):
-        
+
         super().__init__(callback, content_types,commands,
                  regexp, func, chat_types, pass_bot, **kwargs)
         
