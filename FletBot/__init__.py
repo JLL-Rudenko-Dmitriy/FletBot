@@ -1,6 +1,7 @@
-import Handlers
-import Keyboards
-import Markups
+from FletBot.felt_bot import *
+from FletBot import Handler
+from FletBot import Markups
+from FletBot import Keyboards
 
 class CallbackQuery:
     def __init__(self, query) -> None:
@@ -14,7 +15,7 @@ class CallbackQuery:
         self.chat_id : int = self._message.chat.id
         
         self._user = query.from_user
-        self.user_id = self._user.id
+        self.user_id = self._user.user_id
         self.is_bot = self._user.is_bot
         self.first_name = self._user.first_name
         self.last_name = self._user.last_name
@@ -24,11 +25,10 @@ class CallbackQuery:
 
 class MessageQuery:
     def __init__(self, message) -> None:
-        print(message)
         self.message_id : int = message.id
-        self.text : str = self.message.text
-        self.date : int = self.message.date
-        self.chat_id : int = self.message.chat.id
+        self.text : str = message.text
+        self.date : int = message.date
+        self.chat_id : int = message.chat.id
         
         self._user = message.from_user
         self.user_id = self._user.id
@@ -41,8 +41,8 @@ class MessageQuery:
 
 def msg(func):
     async def message_handler(message, bot):
-        msgQ = MessageQuery(message=message)
-        await func(message, bot)
+        msgQ = MessageQuery(message)
+        await func(msgQ, bot)
     return message_handler
 
 def call(func):

@@ -4,8 +4,8 @@ from telebot.asyncio_storage import StateMemoryStorage
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from asyncio import sleep as async_sleep
 
-from Bot.Handlers.base_handler import Handler
-from Bot.Handlers.derived_handlers import *
+from FletBot.Handlers.base_handler import Handler
+from FletBot.Handlers.derived_handlers import *
 
 
 from telebot.asyncio_handler_backends import State, StatesGroup

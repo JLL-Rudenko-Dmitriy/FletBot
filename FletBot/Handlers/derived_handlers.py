@@ -1,5 +1,5 @@
 from telebot.asyncio_handler_backends import State
-from Bot.Handlers.base_handler import Handler
+from FletBot.Handlers.base_handler import Handler
 from typing import Any, Awaitable, Callable, List, Optional, Union
 
 class MessageHandler(Handler):    
